@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroTech - Electrical Engineering Excellence</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #003366;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #003366;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            letter-spacing: 2px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #00509e;
+        }
+
+        /* Mobile Navigation */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .nav-toggle span {
+            height: 3px;
+            width: 25px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: #003366;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: inset 0 0 200px rgba(255,255,255,0.1);
+            }
+            nav ul.active {
+                left: 0;
+            }
+            nav ul li {
+                margin: 20px 0;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+            .nav-toggle.active span:nth-child(2) { opacity: 0; }
+            .nav-toggle.active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+            .nav-toggle.active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0 80px;
+            min-height: 100vh;
+            display: none;
+        }
+        section.active {
+            display: block;
+        }
+        #home {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/777be11a-2270-497f-aeeb-6f4b2114d667.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding-top: 120px;
+        }
+        #home h1 {
+            font-size: 3.5rem;
+            max-width: 900px;
+            margin: 0 auto 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        }
+        #home p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #ffffff;
+            color: #003366;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s, color 0.3s;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #00509e;
+            color: white;
+        }
+
+        /* About */
+        #about .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        #about .image {
+            text-align: center;
+        }
+        #about img {
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 100%;
+            height: auto;
+        }
+        #about .content {
+            max-width: 800px;
+        }
+        @media (min-width: 768px) {
+            #about .container {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+            }
+            #about .image {
+                text-align: right;
+            }
+        }
+
+        /* Services */
+        #services .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        .service-card p {
+            margin-bottom: 20px;
+        }
+
+        /* Projects */
+        #projects .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        .project-gallery {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .project-gallery:hover {
+            transform: translateY(-5px);
+        }
+        .project-gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        .project-gallery .info {
+            padding: 20px;
+        }
+        .project-gallery h4 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        .project-gallery p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        .view-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .view-btn:hover {
+            background-color: #00509e;
+        }
+
+        /* Contact */
+        #contact .container {
+            max-width: 600px;
+        }
+        form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #003366;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #00509e;
+        }
+        .success-message {
+            display: none;
+            color: green;
+            font-weight: 600;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        footer .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+        footer h4 {
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #ffcc00;
+        }
+        @media (max-width: 768px) {
+            footer .container {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">ASEMMATECH COMPANY LIMITED</div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="#home" data-section="home" class="active">Home</a></li>
+                <li><a href="#about" data-section="about">About</a></li>
+                <li><a href="#services" data-section="services">Services</a></li>
+                <li><a href="#projects" data-section="projects">Projects</a></li>
+                <li><a href="#contact" data-section="contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div class="container">
+            <h1>Welcome to ASEMMATECH COMPANY LIMITED : Powering Your Future</h1>
+            <p>Leading the way in electrical engineering with innovative solutions for commercial, industrial, and renewable energy projects. We deliver excellence through precision, sustainability, and expert craftsmanship.</p>
+            <a href="francisasempa8@gmail.com" class="btn">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="image">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0aab2fdd-4a5c-4ac2-8b01-cef0dde8f069.png" alt="Detailed image of engineers collaborating in a modern electrical lab with blueprints and equipment in professional lighting, showcasing teamwork and advanced technology" />
+            </div>
+            <div class="content">
+                <h2>About AsemmaTech</h2>
+                <p>Founded in 2017.AsemmaTech has established itself as a premier electrical engineering company, blending cutting-edge technology with decades of industry expertise. Our team of certified engineers, designers, and technicians is dedicated to delivering top-tier solutions that meet the highest standards of safety, efficiency, and innovation.</p>
+                <p>We specialize in a wide range of sectors, including commercial buildings, industrial facilities, renewable energy installations, and infrastructure development. Our mission is to provide sustainable, reliable electrical systems that power communities, businesses, and industries forward.</p>
+                <p>With a proven track record of successful projects across the globe, we are committed to exceeding client expectations through personalized service, rigorous quality assurance, and ongoing support.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="service-card">
+                <h3>Electrical System Design</h3>
+                <p>Comprehensive design services for low and high-voltage electrical systems, ensuring optimal performance and compliance with all regulatory standards.</p>
+                <p>We utilize advanced CAD software and simulation tools to create efficient, scalable designs tailored to your specific project requirements.</p>
+            </div>
+            <div class="service-card">
+                <h3>Power Distribution & Automation</h3>
+                <p>Expert installation and maintenance of power distribution networks, including transformers, switchgear, and automated control systems.</p>
+                <p>Our solutions minimize downtime and maximize efficiency, integrating IoT technologies for real-time monitoring and management.</p>
+            </div>
+            <div class="service-card">
+                <h3>Renewable Energy Integration</h3>
+                <p>From solar farms to wind turbines, we design and implement integrated renewable energy systems that reduce carbon footprints and energy costs.</p>
+                <p>We handle everything from feasibility studies to grid connection, ensuring seamless integration with existing infrastructure.</p>
+            </div>
+            <div class="service-card">
+                <h3>Project Management & Consulting</h3>
+                <p>End-to-end project management services to keep your electrical projects on time and within budget.</p>
+                <p>Our consultants provide expert advice on regulatory compliance, risk assessment, and cost optimization strategies.</p>
+            </div>
+            <div class="service-card">
+                <h3>Maintenance & Troubleshooting</h3>
+                <p>Routine maintenance programs and rapid response troubleshooting services to ensure uninterrupted operation of your electrical systems.</p>
+                <p>We offer predictive maintenance using AI-driven analytics to anticipate issues before they arise.</p>
+            </div>
+            <div class="service-card">
+                <h3>Compliance & Safety Audits</h3>
+                <p>Thorough audits and certifications to ensure your electrical installations meet all international safety and quality standards.</p>
+                <p>Our team provides detailed reports and actionable recommendations to maintain peak safety and performance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="project-gallery">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ac20c2ab-59f1-4a40-8469-3e083efa5f28.png" alt="Stunning aerial view of large solar panel installation in a desert landscape with blue sky and clear horizon, featuring rows of sleek black panels arranged in grids under bright sunlight" />
+                <div class="info">
+                    <h4>5MW Solar Power Plant</h4>
+                    <p>A state-of-the-art solar installation for a major utility company, featuring advanced tracking systems and integrated energy storage for maximum efficiency and reliability.</p>
+                    <a href="#" class="view-btn">View Details</a>
+                </div>
+            </div>
+            <div class="project-gallery">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cd7eeaf8-45c1-46a6-b861-e84fc453caeb.png" alt="Interior view of high-tech manufacturing facility with automated assembly lines and electrical control panels in cold blue lighting, showing robotic arms and conveyor systems" />
+                <div class="info">
+                    <h4>Industrial Automation Upgrade</h4>
+                    <p>Complete overhaul of electrical systems for a leading automotive manufacturer, including PLC programming, sensor integration, and energy-efficient lighting solutions.</p>
+                    <a href="#" class="view-btn">View Details</a>
+                </div>
+            </div>
+            <div class="project-gallery">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7fbea3ac-47d2-49b1-b83d-9aafc7095e42.png" alt="Modern commercial building exterior with LED lighting and electrical system diagrams overlaid in urban setting, featuring sleek glass facade illuminated after dusk" />
+                <div class="info">
+                    <h4>Smart Building Integration</h4>
+                    <p>Implementation of an IoT-based electrical management system for a 50-story office complex, reducing energy consumption by 30% through intelligent automation.</p>
+                    <a href="#" class="view-btn">View Details</a>
+                </div>
+            </div>
+            <div class="project-gallery">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/08fb5768-3599-4038-af26-35a66ea9393c.png" alt="Wind turbine farms in hilly terrain with electrical substations and power lines in green landscape at golden hour, showing tall white turbines spinning in the wind" />
+                <div class="info">
+                    <h4>Renewable Energy Grid Connection</h4>
+                    <p>Large-scale wind farm interconnection project, including high-voltage transmission lines and substations, connecting green energy to the national grid.</p>
+                    <a href="#" class="view-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="francisasempa8@gmail.com">Email Address</label>
+                    <input type="francisasempa8@gmail.com" id= nImages: Having quality product pictures is a must for e-commerce. Because customer can't touch or see a product. hence having detailed photos from all angles while giving zoom capabilities of images. They assist in customer visualisation of the item and having confidence in the purchase. Videos: Videos too can greatly improve the quality of the shopping experience. They are utilized for product displays by demonstrating and showcasing the item as well as telling the brand story. The customer is able to visualize the product and the brand better especially when a video addresses better emotional connections or questions that a customer may have regarding the product.  
+
+Animation: Subtle animation is used to attract attention to certain actions like 'Buy Now' or to enhance user interaction and experience. These include loading animations or other simple hover animations. Audio: Other less used methods include the overlay of audio to enhance customer connection to a product. These include background audio that creates a certain atmosphere, voiceovers in product videos, and sound effects that are triggered when users perform an action such as adding a product to a cart. Also, you can apply audio descriptions for audio visually impaired users.="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+            <div class="success-message" id="success-message">Thank you! Your message has been sent successfully. We will be in touch soon.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div>
+                <h4>Contact Info</h4>
+                <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                <p><strong>Email:</strong> info@electrotech.com</p>
+                <p><strong>Address:</strong> 123 Engineering Blvd, Tech City, TC 12345</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#projects">Featured Projects</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Follow Us</h4>
+                <p>Stay updated with our latest projects and industry insights.</p>
+                <a href="#" onclick="alert('LinkedIn profile link')">[LinkedIn]</a> | <a href="#" onclick="alert('Twitter profile link')">[Twitter]</a>
+            </div>
+        </div>
+        <div class="container" style="text-align: center; margin-top: 20px; font-size: 0.9rem;">
+            © 2023 ElectroTech Electrical Engineering. All rights reserved. Powered by innovation and expertise.
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Toggle for Mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = document.querySelectorAll('#navbar a');
+
+            navToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            // Smooth scrolling and section switching
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+
+                    // Update active link
+                    navLinks.forEach(function(link) { link.classList.remove('active'); });
+                    this.classList.add('active');
+
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        navMenu.classList.remove('active');
+                        navToggle.classList.remove('active');
+                    }
+                });
+            });
+
+            function showSection(sectionId) {
+                const sections = document.querySelectorAll('section');
+                sections.forEach(function(section) {
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Set default active section
+            showSection('home');
+
+            // Contact form handling
+            const contactForm = document.getElementById('contact-form');
+            const successMessage = document.getElementById('success-message');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // In a real application, you'd send this to a server
+                console.log('Form submitted:', new FormData(this));
+
+                contactForm.reset();
+                successMessage.style.display = 'block';
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            });
+
+            // Image error handling
+            document.querySelectorAll('img').forEach(function(img) {
+                img.addEventListener('error', function() {
+                    // In a real application, you might replace with a default image
+                    console.log('Image failed to load:', this.src);
+                });
+                img.addEventListener('load', function() {
+                    // Ensure proper fallback if needed
+                });
+            });
+
+            // Simple animation on scroll for cards
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.service-card, .project-gallery').forEach(function(card) {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s, transform 0.6s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
+</content>
+</create_file>
+
