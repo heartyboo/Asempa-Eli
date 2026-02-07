@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Segoe_UI } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const segoeUI = Segoe_UI({ 
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-segoe"
+});
 
 export const metadata: Metadata = {
   title: "AsemmaTech Company Limited - Electrical Engineering Excellence",
-  description: "Leading the way in electrical engineering with innovative solutions for commercial, industrial, and renewable energy projects.",
+  description: "Leading the way in electrical engineering with innovative solutions for commercial, industrial, and renewable energy projects. We deliver excellence through precision, sustainability, and expert craftsmanship.",
 };
 
 export default function RootLayout({
@@ -16,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${segoeUI.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
